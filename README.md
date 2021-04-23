@@ -4,9 +4,9 @@
 
 # Installation
 
-    `npm i advacnced-react-native-video-player --save`
+    `npm i react-native-advacned-video-player --save`
     ```
-    import VideoPlayer from 'advacnced-react-native-video-player';
+    import VideoPlayer from 'react-native-advacned-video-player';
       <VideoPlayer data={title:"Video title", url:"video url"} >
 
 # Options
