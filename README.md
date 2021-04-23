@@ -1,6 +1,7 @@
 Properties to pass to the video player component
 
 1.data
+---
 This will be the data object containing title and url properties within(both properties are compulsory)
 
 2.paused
