@@ -28,7 +28,7 @@ class VideoPlayer extends Component {
     super(props);
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     this.state = {
-      data: this.props.data ? this.props.data : {},
+      data: this.props.videoData ? this.props.videoData : {},
       paused: this.props.paused ? this.props.paused : false,
       videosList: this.props.list ? this.props.list : [],
       playInBackground: this.props.playInBackground
