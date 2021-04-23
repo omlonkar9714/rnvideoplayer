@@ -3,7 +3,7 @@
 This package is created by motivation when i was unable to do fullscreen video player in android.
 I did customised this package using react native video.
 
-This package have features as 
+This package have features as
 1.fullscreen video playing
 2.seek forward and backward with give time
 3.orientation change support
@@ -12,7 +12,7 @@ This package have features as
 6.move slider to seek at any part of the video
 7.current time showing on controls
 
-Im new to react native and enthusiastic about it. 
+Im new to react native and enthusiastic about it.
 
 Future goals
 1.Reduce size of the package.
@@ -20,12 +20,11 @@ Future goals
 3.Adding volume control
 4.Adding gesture handler for controlling video player
 
-
 # Installation
 
-    `npm i react-native-advacned-video-player --save`
+    `npm i react-native-video-player-advanced --save`
     ```
-    import VideoPlayer from 'react-native-advacned-video-player';
+    import VideoPlayer from 'react-native-video-player-advanced';
       <VideoPlayer data={title:"Video title", url:"video url"} >
 
 # Options
