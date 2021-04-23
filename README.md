@@ -1,6 +1,6 @@
 # Description
 
-    npm package for playing videos.
+    npm package for playing videos for react native.
 
 # Installation
 
