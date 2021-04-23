@@ -11,6 +11,7 @@ This package have features as
 5.playing list of videos within the videoplayer if list provided
 6.move slider to seek at any part of the video
 7.current time showing on controls
+8. detects orientation for the video and launches video in that mode (you can toggle later from ui)
 
 Im new to react native and enthusiastic about it.
 
