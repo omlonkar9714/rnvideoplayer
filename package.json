@@ -1,7 +1,7 @@
 {
   "name": "rnvideoplayer",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -29,5 +29,22 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "description": "npm package for playing videos.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omlonkar9714/rnvideoplayer.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "videoplayer"
+  ],
+  "author": "Omkar Lonkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omlonkar9714/rnvideoplayer/issues"
+  },
+  "homepage": "https://github.com/omlonkar9714/rnvideoplayer#readme"
 }

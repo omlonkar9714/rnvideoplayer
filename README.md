@@ -1,3 +1,16 @@
+# Description
+
+    npm package for playing videos.
+
+# Installation
+
+    `npm i rnvideoplayer --save`
+    ```
+    import VideoPlayer from 'rnvideoplayer';
+      <VideoPlayer data={title:"Video title", url:"video url"} >
+
+# Options
+
 Properties to pass to the video player component
 
 1.data
