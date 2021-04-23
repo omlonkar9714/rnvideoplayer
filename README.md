@@ -31,7 +31,7 @@ Future goals
 
 Properties to pass to the video player component
 
-## 1.data
+## 1.videoData
 
 This will be the data object containing current video title and url properties within(both properties are compulsory)
 
