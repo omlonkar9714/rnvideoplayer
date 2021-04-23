@@ -3,11 +3,14 @@ import {createRef} from 'react';
 import {
   View,
   Text,
+  Button,
   TouchableWithoutFeedback,
   ToastAndroid,
+  Animated,
   TouchableOpacity,
   ActivityIndicator,
   StatusBar,
+  StyleSheet,
 } from 'react-native';
 import {BackHandler} from 'react-native';
 
@@ -21,6 +24,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import Slider from 'react-native-slider';
 
+import TestVideos from '../model/VideosList';
 import Orientation from 'react-native-orientation';
 
 class VideoPlayerExample extends Component {
@@ -28,22 +32,12 @@ class VideoPlayerExample extends Component {
     super(props);
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     this.state = {
-      data: this.props.videoData ? this.props.videoData : {},
-      paused: this.props.paused ? this.props.paused : false,
-      videosList: this.props.list ? this.props.list : [],
-      playInBackground: this.props.playInBackground
-        ? this.props.playInBackground
-        : false,
-      repeat: this.props.repeat ? this.props.repeat : false,
-      seekTime: this.props.seekTime ? this.props.seekTime : 5,
-      videoPlayerBackgroundColor: this.props.videoPlayerBackgroundColor
-        ? this.props.videoPlayerBackgroundColor
-        : 'black',
-      resizeMode: this.props.resizeMode ? this.props.resizeMode : 'contain',
-
-      //controls
-      videoLoading: false,
+      data: TestVideos[0],
       controlsVisible: false,
+      controlsOpacity: new Animated.Value(0),
+      paused: false,
+      videosList: TestVideos,
+      videoLoading: false,
       currentTime: 0,
       seekableDuration: 0,
       isLandscape: false,
@@ -52,6 +46,7 @@ class VideoPlayerExample extends Component {
 
   componentDidMount() {
     StatusBar.setHidden(true);
+
     Orientation.addOrientationListener(this._orientationDidChange);
   }
 
@@ -161,13 +156,13 @@ class VideoPlayerExample extends Component {
           width: '100%',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: this.state.videoPlayerBackgroundColor,
+          backgroundColor: 'black',
         }}>
         <TouchableWithoutFeedback onPress={this.onPlayerScreenTapped}>
           <View style={{height: '100%', width: '100%'}}>
             <Video
-              playInBackground={this.state.playInBackground}
-              repeat={this.state.repeat}
+              playInBackground={false}
+              repeat={true}
               onLoadStart={() => {
                 this.setState({videoLoading: true});
               }}
@@ -193,7 +188,7 @@ class VideoPlayerExample extends Component {
                 this.setState({paused: true});
               }}
               paused={this.state.paused}
-              resizeMode={this.state.resizeMode}
+              resizeMode="contain"
               source={{
                 uri: this.state.data.url,
               }} // Can be a URL or a local file.
@@ -214,11 +209,9 @@ class VideoPlayerExample extends Component {
                   alignItems: 'center',
                 }}>
                 <Text
-                  style={{
-                    fontSize: 15,
-                    color: '#4156f6',
-                    marginVertical: 10,
-                  }}></Text>
+                  style={{fontSize: 15, color: '#4156f6', marginVertical: 10}}>
+                  {/* Loading video... */}
+                </Text>
                 <ActivityIndicator
                   size="large"
                   color="black"></ActivityIndicator>
@@ -314,6 +307,7 @@ class VideoPlayerExample extends Component {
                 }}>
                 <Slider
                   tapToSeek
+                  vertical={true}
                   step={1}
                   onSlidingStart={() => {
                     this.setState({controlsVisible: true});
@@ -368,9 +362,7 @@ class VideoPlayerExample extends Component {
                     }}>
                     <TouchableOpacity
                       onPress={() => {
-                        this.player.seek(
-                          this.state.currentTime - this.state.seekTime + 1,
-                        );
+                        this.player.seek(this.state.currentTime - 6);
                       }}>
                       <View
                         style={{
@@ -396,35 +388,33 @@ class VideoPlayerExample extends Component {
                             position: 'absolute',
                             fontSize: 10,
                           }}>
-                          -{this.state.seekTime}
+                          -5
                         </Text>
                       </View>
                     </TouchableOpacity>
 
-                    {this.state.videosList.length > 0 && (
-                      <TouchableOpacity
-                        onPress={() => {
-                          this.setState({currentTime: 0});
-                          this.onPrevNextPress('prev');
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.setState({currentTime: 0});
+                        this.onPrevNextPress('prev');
+                      }}>
+                      <View
+                        style={{
+                          height: 40,
+                          marginHorizontal: 30,
+                          width: 40,
+                          borderRadius: 25,
+                          backgroundColor: 'transparent',
+                          justifyContent: 'center',
+                          alignItems: 'center',
                         }}>
-                        <View
-                          style={{
-                            height: 40,
-                            marginHorizontal: 30,
-                            width: 40,
-                            borderRadius: 25,
-                            backgroundColor: 'transparent',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}>
-                          <FontIcon
-                            style={{position: 'absolute'}}
-                            size={23}
-                            color="white"
-                            name="play-skip-back"></FontIcon>
-                        </View>
-                      </TouchableOpacity>
-                    )}
+                        <FontIcon
+                          style={{position: 'absolute'}}
+                          size={23}
+                          color="white"
+                          name="play-skip-back"></FontIcon>
+                      </View>
+                    </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
                         if (this.state.controlsVisible) {
@@ -450,36 +440,32 @@ class VideoPlayerExample extends Component {
                           }></FontIcon>
                       </View>
                     </TouchableOpacity>
-
-                    {this.state.videosList.length > 0 && (
-                      <TouchableOpacity
-                        onPress={() => {
-                          this.setState({currentTime: 0});
-                          this.onPrevNextPress('next');
-                        }}>
-                        <View
-                          style={{
-                            marginHorizontal: 30,
-                            height: 40,
-                            width: 40,
-                            borderRadius: 25,
-                            backgroundColor: 'transparent',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}>
-                          <FontIcon
-                            style={{position: 'absolute'}}
-                            size={23}
-                            color="white"
-                            name="play-skip-forward"></FontIcon>
-                        </View>
-                      </TouchableOpacity>
-                    )}
                     <TouchableOpacity
                       onPress={() => {
-                        this.player.seek(
-                          this.state.currentTime + this.state.seekTime + 1,
-                        );
+                        this.setState({currentTime: 0});
+                        this.onPrevNextPress('next');
+                      }}>
+                      <View
+                        style={{
+                          marginHorizontal: 30,
+                          height: 40,
+                          width: 40,
+                          borderRadius: 25,
+                          backgroundColor: 'transparent',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+                        <FontIcon
+                          style={{position: 'absolute'}}
+                          size={23}
+                          color="white"
+                          name="play-skip-forward"></FontIcon>
+                      </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.player.seek(this.state.currentTime + 6);
                       }}>
                       <View
                         style={{
@@ -502,7 +488,7 @@ class VideoPlayerExample extends Component {
                             position: 'absolute',
                             fontSize: 10,
                           }}>
-                          +{this.state.seekTime}
+                          +5
                         </Text>
                       </View>
                     </TouchableOpacity>
