@@ -1,6 +1,25 @@
 # Description
 
-    npm package for playing videos for react native.
+This package is created by motivation when i was unable to do fullscreen video player in android.
+I did customised this package using react native video.
+
+This package have features as 
+1.fullscreen video playing
+2.seek forward and backward with give time
+3.orientation change support
+4.play pause video
+5.playing list of videos within the videoplayer if list provided
+6.move slider to seek at any part of the video
+7.current time showing on controls
+
+Im new to react native and enthusiastic about it. 
+
+Future goals
+1.Reduce size of the package.
+2.Adding brightness control
+3.Adding volume control
+4.Adding gesture handler for controlling video player
+
 
 # Installation
 
